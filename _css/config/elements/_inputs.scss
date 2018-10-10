@@ -1,0 +1,17 @@
+%input{
+  color: inherit;
+  font-weight: inherit;
+  display: block;
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  border-radius: 3em;
+  line-height: 3;
+  height: 3em;
+  padding: 0 1em;
+  font-style: italic;
+  transition: 300ms;
+}
+
+%input--error{
+  border-color: #ff6258;
+}

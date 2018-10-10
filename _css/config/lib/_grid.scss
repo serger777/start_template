@@ -1,0 +1,159 @@
+/// Breackpoint
+$xs: 450px;
+/// Breackpoint
+$sm: 768px;
+/// Breackpoint
+$md: 1000px;
+/// Breackpoint
+$lg: 1296px;
+
+/// Padding
+$padding: 0.5rem;
+
+/// Container size map
+$adatpive-map: (
+        $lg: $md,
+        $md: 100%,
+        $sm: 100%,
+        $xs: 100%,
+);
+
+/// @name clearfix
+@mixin clearfix() {
+  &:before, &:after {
+    content: ' ';
+    display: table;
+    clear: both;
+    width: 100%;
+  }
+}
+
+/// Like .container
+@mixin container($padding: $padding) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  width: $lg;
+  padding-left: $padding;
+  padding-right: $padding;
+  @each $window, $container in $adatpive-map {
+    @media (max-width: $window) {
+      width: $container;
+    }
+  }
+  @media (max-width: $md) {
+    padding-left: 2*$padding;
+    padding-right: 2*$padding;
+  }
+}
+
+/// Like .row
+@mixin row($p: $padding) {
+  margin-right: -$p;
+  margin-left: -$p;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+@mixin grid-width($col, $grid) {
+  @if ($col == 0) {
+    display: none;
+  } @else {
+    flex-basis: $col/$grid*100%;
+    max-width: $col/$grid*100%;
+  }
+  box-sizing: border-box;
+}
+
+@mixin col-fixed($w, $p: $padding) {
+  flex: 0 0 $w;
+  padding-left: $p;
+  padding-right: $p;
+}
+
+/// Like .col-...
+/// @param {int} $a - Size of column on $sm-
+/// @param {int} $b - Size of column on $sm-$md
+/// @param {int} $c - Size of column on $md-$lg
+/// @param {int} $d - Size of column on $lg+
+/// @param {int} $grid [12] - Number of columns
+/// @param {int} $padding [$padding=12] - Number of columns
+@mixin col($a, $b, $c, $d,  $grid:12, $p: $padding) {
+  padding-left: $p;
+  padding-right: $p;
+  @media all and (min-width: $lg) {
+    @include grid-width($d, $grid);
+  }
+  @media all and (min-width: $md +1) and (max-width: $lg) {
+    @include grid-width($c, $grid);
+  }
+  @media all and (min-width: $sm +1) and (max-width: $md) {
+    @include grid-width($b, $grid);
+  }
+  @media all and (max-width: $sm) {
+    @include grid-width($a, $grid);
+  }
+}
+
+@mixin setParam($param, $a, $b, $c, $d, $grid) {
+  @if $d !=0 {
+    @media (min-width: $lg) {
+      #{$param}: $d/$grid*100%;
+    }
+  }
+  @if $c!=0 {
+    @media (min-width: $md +1) and (max-width: $lg) {
+      #{$param}: $c/$grid*100%;
+    }
+  }
+  @if $b!=0 {
+    @media (min-width: $sm +1) and (max-width: $md) {
+      #{$param}: $b/$grid*100%;
+    }
+  }
+  @if $a!=0 {
+    @media (max-width: $sm) {
+      #{$param}: $a/$grid*100%;
+    }
+  }
+}
+
+@mixin col-equal($p: $padding) {
+  padding-left: $p;
+  padding-right: $p;
+  flex: 1 0 auto;
+}
+
+/// Like .col-offset-...
+/// @param {int} $a - Offset on $sm-
+/// @param {int} $b - Offset on $sm-$md
+/// @param {int} $c - Offset on $md-$lg
+/// @param {int} $d - Offset on $lg+
+/// @param {int} $grid [12] - Number of columns
+@mixin col-offset($a, $b, $c, $d, $grid:12) {
+  @include setParam(margin-left, $a, $b, $c, $d, $grid);
+}
+
+/// Like .col-pull-...
+/// @param {int} $a - Pull left on $sm-
+/// @param {int} $b - Pull left on $sm-$md
+/// @param {int} $c - Pull left on $md-$lg
+/// @param {int} $d - Pull left on $lg+
+/// @param {int} $grid [12] - Number of columns
+@mixin col-pull($a, $b, $c, $d, $grid:12) {
+  @include setParam(right, $a, $b, $c, $d, $grid);
+}
+
+/// Like .col-push-...
+/// @param {int} $a - Push right on $sm-
+/// @param {int} $b - Push right on $sm-$md
+/// @param {int} $c - Push right on $md-$lg
+/// @param {int} $d - Push right on $lg+
+/// @param {int} $grid [12] - Number of columns
+@mixin col-push($a, $b, $c, $d, $grid:12) {
+  @include setParam(left, $a, $b, $c, $d, $grid);
+}

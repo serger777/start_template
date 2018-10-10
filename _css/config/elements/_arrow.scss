@@ -1,0 +1,36 @@
+@mixin arrow($side, $color, $size: 1rem, $padding: 50%) {
+
+  position: relative;
+  &:after {
+    border: solid transparent;
+
+    @if $side == left {
+      right: 100%;
+      top: $padding;
+      border-right-color: $color;
+    }
+    @if $side == right {
+      left: 100%;
+      top: $padding;
+      border-left-color: $color;
+    }
+    @if $side == top {
+      bottom: 100%;
+      left: $padding;
+      border-bottom-color: $color;
+    }
+    @if $side == bottom {
+      top: 100%;
+      left: $padding;
+      border-top-color: $color;
+    }
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+
+    border-width: $size;
+  }
+
+}

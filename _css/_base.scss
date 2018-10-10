@@ -1,0 +1,12 @@
+@import "config/lib/grid";
+$ff_FONTNAME: "rubik";
+
+.container{
+  @include container();
+}
+
+
+body, html {
+  font-family: $ff_FONTNAME;
+  background-color: #f6f6f6;
+}

@@ -1,0 +1,91 @@
+%btn {
+  display: block;
+  margin: 0 auto;
+  line-height: 3em;
+  height: 3em;
+  padding: 0 2em;
+  border: none;
+  border-radius: 3em;
+  cursor: pointer;
+  transition: 300ms;
+  white-space: nowrap;
+}
+
+%btn--blue {
+  color: color(white);
+  background: color(blue);
+  font-weight: bold;
+  &:hover {
+    box-shadow: 0 0.125em 1em rgba(0, 0, 0, 0.35);
+  }
+}
+
+%btn--blue-border {
+  color: color(blue);
+  background: color(white);
+  border: 2px solid color(blue);
+  font-weight: bold;
+  &:hover {
+    box-shadow: 0 0.125em 1em rgba(0, 0, 0, 0.35);
+  }
+}
+
+
+%btn--border {
+  color: color(darkorange);
+  border: 1px solid color(darkorange);
+  background: color(white);
+  &:hover {
+    background-color: color(darkorange);
+    color: color(white);
+  }
+}
+
+%btn--white {
+  color: color(darkorange);
+  background: color(white);
+  display: inline-block;
+  border: none;
+  &:hover {
+    color: color(darkorange);
+    border: none;
+    background: color(white);
+    @include shadow('small');
+  }
+  &:disabled {
+    color: lightgray;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+%header-btn {
+  font-size: 0.75rem;
+  cursor: pointer;
+  &__icon {
+    background: center no-repeat;
+    width: 100%;
+    height: 2em;
+    position: relative;
+  }
+  &__label {
+    text-align: center;
+    opacity: .5;
+    line-height: 1.5em;
+  }
+  &__count {
+    position: absolute;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    border-radius: 50%;
+    background: color(red);
+    color: color(white);
+    font-weight: bold;
+    left: 50%;
+    bottom: 50%;
+  }
+}
+

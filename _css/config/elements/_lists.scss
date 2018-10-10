@@ -1,0 +1,96 @@
+%custom-label-list {
+  list-style: none;
+  li {
+    $lh: 2.5em;
+    display: block;
+    position: relative;
+    padding-left: 3em;
+    line-height: $lh;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: calc(#{0.5*$lh} - 1px);
+      width: 2em;
+      height: 2px;
+    }
+  }
+  @media screen and (max-width: $xs) {
+    li {
+      padding-left: 40px;
+      &:before {
+        width: 22px;
+      }
+    }
+  }
+}
+
+%custom-label-list--orange {
+  @extend %custom-label-list;
+  & > li {
+    &:before {
+      background-color: color(orange);
+    }
+  }
+}
+
+//%big-numbers{
+//  @extend %custom-label-list;
+//  counter-reset: olCounter;
+//  &>li {
+//    padding-left: 20px;
+//    &:before {
+//      counter-increment: olCounter;
+//      content: counter(olCounter);
+//      @include text($fc: #000, $ff: $ff_arimo, $fs: 22px, $fw: 700);
+//      top: 0;
+//      right: 0;
+//    }
+//  }
+//}
+
+//--------------------------------------//
+
+// выпадающее меню на мобилке
+
+//--------------------------------------//
+// кнопка
+/*
+%dropdown__header {
+  @media screen and (max-width: $sm) {
+    @include text($fc: #247dc9);
+    position: relative;
+    border-radius: 2px;
+    border: 1px solid #287fcb;
+    padding: 16px 18px 16px 30px;
+    background-color: #fff;
+    &:after {
+      content: '';
+      transition: all 300ms ease-out;
+      display: block;
+      position: absolute;
+      width: 8px;
+      height: 4px;
+      top: 50%;
+      right: 25px;
+      transform: translateY(-50%);
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAYAAACzzX7wAAAANUlEQVQYV2PUaDiVwPCfcT4DNvD//0JGkDhWRUDJG01mCWAFGIqgkiBxuAK4on8MDiCdMI0A+bYbFa36NP4AAAAASUVORK5CYII=);
+    }
+    &.active {
+      &:after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+//список
+%dropdown__list {
+  @media screen and (min-width: $sm) {
+    display: block;
+  }
+  @media screen and (max-width: $sm) {
+    display: none;
+    list-style: none;
+  }
+}*/
