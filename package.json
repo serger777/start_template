@@ -25,7 +25,9 @@
     "postcss-svg": "*",
     "postcss-svg-fallback": "*",
     "browser-sync": "*",
-    "gulp-cache": "*"
+    "gulp-cache": "*",
+    "gulp-concat": "*"
+
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

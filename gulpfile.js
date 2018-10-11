@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     svgstore = require('gulp-svgstore'),
     svgmin = require('gulp-svgmin'),
     browserSync = require('browser-sync'),
-    cache = require('gulp-cache');
+    cache = require('gulp-cache'),
+    concat = require('gulp-concat');
 
 const SYNC = false;
 
@@ -54,6 +55,7 @@ var pathBX = {
 
 gulp.task('js:build', function (done) {
     gulp.src(path.src.js, {since: gulp.lastRun('js:build')})
+        .pipe(sourcemaps.init()) //То же самое что и с js
         .pipe(uglify()).on("error", function () {
         console.log('FUCK JS')
     })
@@ -65,16 +67,20 @@ gulp.task('js:build', function (done) {
                 path.basename += '.min';
             }
         }))
-        .pipe(gulp.dest(path.build.js));
+        .pipe(concat('all.min.js'))
+        .pipe(sourcemaps.write()) //Пропишем карты
+         .pipe(gulp.dest(path.build.js));
     done();
 });
 gulp.task('style:build', function (done) {
     const pathes = [path, pathBX];
     pathes.map(function (path) {
         gulp.src(path.src.style)
+            .pipe(sourcemaps.init()) //То же самое что и с js
             .pipe(sass()).on("error", sass.logError)
             .pipe(postcss([autoprefixer({browsers: ['last 1616 version']})]))
             .pipe(cssnano({autoprefixer: false, convertValues: false, zindex: false}))
+            .pipe(sourcemaps.write())
             .pipe(gulp.dest(path.build.css));
     });
     done();
